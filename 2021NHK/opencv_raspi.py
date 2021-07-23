@@ -71,7 +71,7 @@ if __name__ == '__main__':
         if getframe is not None:
             # 見つかった円の上に青い円を描画
             # getframe[0]:中心座標、getframe[1]:半径
-            cv2.circle(frame, getframe[0], getframe[1], (255, 0, 0), 2)
+            #cv2.circle(frame, getframe[0], getframe[1], (255, 0, 0), 2)
             print(getframe[0])
             #位置情報渡す
             ser.write(getframe[0][0])
@@ -79,10 +79,10 @@ if __name__ == '__main__':
             ser.write(getframe[1])
 
         # 検出結果とともに映像を表示
-        cv2.imshow('Circle Detect', frame)
+        #cv2.imshow('Circle Detect', frame)
 
-        if cv2.waitKey(100) & 0xFF == ord('q'):
-            break
+        #if cv2.waitKey(100) & 0xFF == ord('q'):
+        #    break
 
     # 終了時にカメラを解放
     cap.release()
