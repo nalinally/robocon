@@ -1,5 +1,4 @@
 #include "mbed.h"
-#include <string>
 
 
 //ピンとかの宣言
@@ -15,13 +14,13 @@ PwmOut MP[] = {
     PwmOut(PF_0)
 };
 
+DigitalIn kicking(PA_1);
 Serial Raspi(PA_9, PA_10);  //Raspi(たぶん)と通信
 Serial PC(USBTX, USBRX);  //pcと通信
 
 
 //関数の宣言
 void PS3Data(void);
-void Raspidata(void);  //Raspi(たぶん)からデータを受け取る
 void Move(float sheta, float r);  //足回り
 
 
@@ -35,14 +34,15 @@ float kakudo, kyori;  //移動する角度と距離(速度?)
 float tanjent, squarekyori;  //途中計算で使うやつ
 float disgain = 0.015;  //足回りの速さ決める
 float xrange = 638, yrange = 478, rrange = 400;
-float rightxleg = 485, leftxleg = 485, yleg = 305, r = 265;
+float rightxleg = 465, leftxleg = 465, yleg = 305, r = 210;
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
-std::string numStr;
 
 //関数の中身
 int main(void)
 {
+    kicking.mode(PullDown);
+    
     Raspi.baud(9600);
     Raspi.attach(PS3Data, Serial::RxIrq);
     
@@ -57,7 +57,7 @@ int main(void)
         move[1] = (float)ball[1] - ((integ_x[0] + integ_x[1] + integ_x[2] + integ_x[3] + integ_x[4]) * 24);
         move[2] = (float)ball[2] + ((integ_y[0] + integ_y[1] + integ_y[2] + integ_y[3] + integ_y[4]) * 24);
         
-        if(move[1] < xrange / 2){
+        if(move[1] < (leftxleg + rightxleg) / 2){
             x_move = move[1] - (xrange / 2) - leftx;
         }
         else{
@@ -85,6 +85,9 @@ int main(void)
         if(kyori > 1){
             kyori = 1;
         }
+        if(kicking){
+            kyori *= 0.6;
+        }
         PC.printf("%d, %d, %d, %d, %.2f, %.2f\n\r", ball[0], ball[1], ball[2], ball[3], kakudo, kyori);
         Move(kakudo, kyori);
         integ_x[j] = kyori * cos(kakudo);
@@ -101,7 +104,7 @@ int main(void)
 
 void Move(float sheta, float r)
 {
-    float M[3], jusinchosei = 1.5;
+    float M[3];
     int i;
     
     M[0] = cos(sheta) * r;
@@ -145,38 +148,6 @@ void PS3Data(void)
             else{
                 bits++;
             }
-        }
-    }
-}
-
-void Raspidata(void)
-{
-    static int a[5], n, m, o, bits = 0, i;
-    //受信割り込みのときに来るよ
-    numStr = Raspi.getc();
-    if(numStr == "b"){
-        o = 1;
-        i = 0;
-        for(m = n-1; m >= 0; m--){
-            i += o * a[m];
-            o *= 10;
-        }
-        if(i == 128){
-            bits = 0;
-        }
-        ball[bits] = i;
-        if(bits == 3){
-            bits = 0;
-        }
-        else{
-            bits++;
-        }
-        n = 0;
-    }
-    else{
-        a[n] = atoi(numStr.c_str());
-        if(n < 5){
-            n++;
         }
     }
 }
