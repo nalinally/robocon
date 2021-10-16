@@ -105,7 +105,7 @@ int main(void)
 void Kick(int ch)
 {
     PC.printf("Kick!\n\r");
-    wait(0.17);
+    wait(0.18);
     MD[ch] = 0;
     MP[ch] = 0.5;
     wait(0.2);
