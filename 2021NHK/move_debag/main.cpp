@@ -34,7 +34,9 @@ float kakudo, kyori;  //移動する角度と距離(速度?)
 float tanjent, squarekyori;  //途中計算で使うやつ
 float disgain = 0.015;  //足回りの速さ決める
 float xrange = 638, yrange = 478, rrange = 400;
-float rightxleg = 465, leftxleg = 465, yleg = 305, r = 210;
+float xcenter = xrange / 2;
+float ycenter = yrange / 2;
+float rightxleg = 445, leftxleg = 445, yleg = 305, rleg = 210;
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
 
@@ -51,33 +53,33 @@ int main(void)
     MP[2].period(0.0002);
     
     while(1){
-        leftx = (leftxleg - (xrange / 2)) * ((float)ball[3] / r);
-        rightx = (rightxleg - (xrange / 2)) * ((float)ball[3] / r);
-        y = (yleg - (yrange / 2)) * ((float)ball[3] / r);
+        leftx = (leftxleg - xcenter) * ((float)ball[3] / rleg);
+        rightx = (rightxleg - xcenter) * ((float)ball[3] / rleg);
+        y = (yleg - ycenter) * ((float)ball[3] / rleg);
         move[1] = (float)ball[1] - ((integ_x[0] + integ_x[1] + integ_x[2] + integ_x[3] + integ_x[4]) * 24);
         move[2] = (float)ball[2] + ((integ_y[0] + integ_y[1] + integ_y[2] + integ_y[3] + integ_y[4]) * 24);
         
         if(move[1] < (leftxleg + rightxleg) / 2){
-            x_move = move[1] - (xrange / 2) - leftx;
+            x_move = move[1] - xcenter - leftx;
         }
         else{
-            x_move = move[1] - (xrange / 2) - rightx;
+            x_move = move[1] - xcenter - rightx;
         }
-        y_move = -move[2] + (yrange / 2) + y;
+        y_move = -move[2] + ycenter + y;
         
         if(x_move == 0){
             if(y_move >= 0){
-                kakudo = 1.57;
+                kakudo = 1.571;
             }
             else if(y_move < 0){
-                kakudo = -1.57;
+                kakudo = -1.571;
             }
         }
         else{        
             tanjent = y_move / x_move;
             kakudo = atan(tanjent);
             if(x_move < 0){
-                kakudo += 3.14;
+                kakudo += 3.142;
             }
         }
         squarekyori = (x_move * x_move) + (y_move * y_move);
@@ -85,9 +87,9 @@ int main(void)
         if(kyori > 1){
             kyori = 1;
         }
-        if(kicking){
-            kyori *= 0.6;
-        }
+        if(kicking && kyori > 0.6){
+            kyori = 0.6;
+        }        
         PC.printf("%d, %d, %d, %d, %.2f, %.2f\n\r", ball[0], ball[1], ball[2], ball[3], kakudo, kyori);
         Move(kakudo, kyori);
         integ_x[j] = kyori * cos(kakudo);
@@ -108,8 +110,8 @@ void Move(float sheta, float r)
     int i;
     
     M[0] = cos(sheta) * r;
-    M[1] = cos(sheta + 4.18) * r;
-    M[2] = cos(sheta + 2.09) * r;
+    M[1] = cos(sheta + 4.189) * r;
+    M[2] = cos(sheta + 2.094) * r;
     
     for(i = 0; i < 3; i++){
         if(M[i] < 0){
