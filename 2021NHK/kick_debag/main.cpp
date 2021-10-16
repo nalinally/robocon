@@ -105,15 +105,15 @@ int main(void)
 void Kick(int ch)
 {
     PC.printf("Kick!\n\r");
-    wait(0.2);
+    wait(0.17);
     MD[ch] = 0;
     MP[ch] = 0.5;
-    wait(0.4);
-    kicking = 1;
     wait(0.2);
+    kicking = 1;
+    wait(0.4);
     MD[ch] = 1;
     MP[ch] = 0.5;
-    wait(0.2);
+    wait(0.4);
     kicking = 0;
     while(1){
         if(limit[ch]){
