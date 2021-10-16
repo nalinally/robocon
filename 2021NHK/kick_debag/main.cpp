@@ -113,14 +113,13 @@ void Kick(int ch)
     wait(0.4);
     MD[ch] = 1;
     MP[ch] = 0.5;
-    wait(0.4);
-    kicking = 0;
     while(1){
         if(limit[ch]){
             MP[ch] = 0;
             break;
         }
     }
+    kicking = 0;
     MD[ch] = 0;
     MP[ch] = 1;
     wait(0.05);
