@@ -33,7 +33,7 @@ void PS3Data(void);
 
 //変数の宣言
 int ball[4];  //ball[0]:ヘッダ(128) ball[1]:横(0~63) ball[2]:縦(0~47) ball[3]:半径(0~39)
-int kickdis = 50;
+int kickdis = 75;
 int radius[5], speed[2], alpha, i;
 
 
