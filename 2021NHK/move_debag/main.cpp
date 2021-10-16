@@ -36,7 +36,7 @@ float disgain = 0.015;  //足回りの速さ決める
 float xrange = 638, yrange = 478, rrange = 400;
 float xcenter = xrange / 2;
 float ycenter = yrange / 2;
-float rightxleg = 445, leftxleg = 445, yleg = 305, rleg = 210;
+float rightxleg = 425, leftxleg = 425, yleg = 305, rleg = 210;
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
 
@@ -84,12 +84,12 @@ int main(void)
         }
         squarekyori = (x_move * x_move) + (y_move * y_move);
         kyori = (sqrt(squarekyori) * disgain);
+        if(kicking){
+            kyori *= 0.4;
+        }   
         if(kyori > 1){
             kyori = 1;
-        }
-        if(kicking && kyori > 0.6){
-            kyori = 0.6;
-        }        
+        }     
         PC.printf("%d, %d, %d, %d, %.2f, %.2f\n\r", ball[0], ball[1], ball[2], ball[3], kakudo, kyori);
         Move(kakudo, kyori);
         integ_x[j] = kyori * cos(kakudo);
