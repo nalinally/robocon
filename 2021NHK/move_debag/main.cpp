@@ -36,7 +36,7 @@ float disgain = 0.015;  //足回りの速さ決める
 float xrange = 638, yrange = 478, rrange = 400;
 float xcenter = xrange / 2;
 float ycenter = yrange / 2;
-float rightxleg = 425, leftxleg = 425, yleg = 305, rleg = 210;
+float rightxleg = 425, leftxleg = 425, yleg = 305, rleg = 310;
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
 
