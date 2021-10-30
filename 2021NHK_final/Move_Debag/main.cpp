@@ -1,5 +1,5 @@
 #include "mbed.h"
-
+#include "HC_SR04.h"
 
 //ピンとかの宣言
 DigitalOut MD[] = {
@@ -14,15 +14,18 @@ PwmOut MP[] = {
     PwmOut(PF_0)
 };
 
-DigitalIn kicking(PA_1);
+HC_SR04 TR(PA_4, PA_3);
+InterruptIn kicking(PA_1);
 Serial Raspi(PA_9, PA_10);  //Raspi(たぶん)と通信 ←Jetsonを使ったよ
 Serial PC(USBTX, USBRX);  //pcと通信
-
+Timer tup;
+Timer tdown;
 
 //関数の宣言
 void PS3Data(void);
 void Move(float sheta, float r);  //足回り
-
+void timerup(void);
+void timerdown(void);
 
 //変数の宣言
 int j = 0, m = 0, n = 1;
@@ -32,11 +35,11 @@ float differ[2][4], accel = 0;
 float integ_x[5] = {0, 0, 0, 0, 0}, integ_y[5] = {0, 0, 0, 0, 0};  //移動距離積分
 float kakudo, kyori;  //移動する角度と距離(速度?)
 float tanjent, squarekyori;  //途中計算で使うやつ
-float disgain = 0.012, maxaccel = 0.075;  //足回りの速さ決める 最大加速度
+float disgain = 0.018, maxaccel = 0.075;  //足回りの速さ決める 最大加速度
 float xrange = 638, yrange = 478, rrange = 400;
 float xcenter = xrange / 2;
 float ycenter = yrange / 2;
-float rightxleg = 425, leftxleg = 425, yleg = 305, rleg = 310;
+float rightxleg = 445, leftxleg = 445, yleg = 325, rleg = 162;
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
 
@@ -44,6 +47,8 @@ float x_move, y_move;
 int main(void)
 {
     kicking.mode(PullDown);
+    kicking.rise(*timerup);
+    kicking.fall(*timerdown);
     
     Raspi.baud(9600);
     Raspi.attach(PS3Data, Serial::RxIrq);
@@ -70,6 +75,14 @@ int main(void)
             x_move = move[1] - xcenter - rightx;
         }
         y_move = -move[2] + ycenter + y;
+        
+        //足の上げ具合で加速度の上限を決めるよ
+        if(tup.read() - tdown.read() <= 0){
+            maxaccel = 0.75;
+        }
+        else{
+            maxaccel = 0.75 - ((tup.read() - tdown.read()));
+        }
         
         //x軸の加速度制御するよ
         if(x_move > 1 / disgain){
@@ -116,9 +129,11 @@ int main(void)
         }
         squarekyori = (x_move * x_move) + (y_move * y_move);
         kyori = (sqrt(squarekyori) * disgain);
+        /*
         if(kicking){
             kyori *= 0.4;
-        }   
+        }
+        */   
         if(kyori > 1){
             kyori = 1;
         }
@@ -191,4 +206,19 @@ void PS3Data(void)
             }
         }
     }
+}
+
+void timerup(void)
+{
+    tdown.stop();
+    tdown.reset();
+    tup.reset();
+    tup.start();
+}
+
+void timerdown(void)
+{
+    tup.stop();
+    tdown.reset();
+    tdown.start();
 }
