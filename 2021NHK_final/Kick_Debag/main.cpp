@@ -13,6 +13,7 @@ PwmOut MP[2] = {
     PwmOut(PB_6)
 };
 
+Timer t;
 
 DigitalIn limit[2] = {
     DigitalIn(PA_6),
@@ -59,11 +60,11 @@ int main(void)
     PC.printf("position reset\n\r");
     
     while(1){
-        if(limit[0] == 1){
+        if(limit[0]){
             PC.printf("0");
             MP[0] = 0;
             while(1){
-                if(limit[1] == 1){
+                if(limit[1]){
                     PC.printf("1");
                     MP[1] = 0;
                     break;
@@ -71,11 +72,11 @@ int main(void)
             }
             break;
         }
-        if(limit[1] == 1){
+        if(limit[1]){
             PC.printf("1");
             MP[1] = 0;
             while(1){
-                if(limit[0] == 1){
+                if(limit[0]){
                     PC.printf("0");
                     MP[0] = 0;
                     break;
@@ -92,10 +93,10 @@ int main(void)
         if(TR.Get_Distance() <= kickdis){
             if(1){
                 if(ball[1] < 319){
-                    Kick(1);
+                    Kick(0);
                 }
                 else{
-                    Kick(1);
+                    Kick(0);
                 }
             }
         }
@@ -105,21 +106,30 @@ int main(void)
 void Kick(int ch)
 {
     PC.printf("Kick!\n\r");
-    wait(0.18);
-    MD[ch] = 0;
-    MP[ch] = 0.5;
-    wait(0.2);
+    wait(0.05);
     kicking = 1;
+    MD[ch] = 0;
+    MP[ch] = 0.8;
     wait(0.4);
     MD[ch] = 1;
-    MP[ch] = 0.5;
+    MP[ch] = 1;
+    kicking = 0;
+    t.reset();
+    t.start();
     while(1){
-        if(limit[ch] == 1){
+        if(limit[ch] || t.read() > 0.2){
             MP[ch] = 0;
             break;
         }
     }
-    kicking = 0;
+    MD[ch] = 1;
+    MP[ch] = 0.5;
+    while(1){
+        if(limit[ch]){
+            MP[ch] = 0;
+            break;
+        }
+    }
     MD[ch] = 0;
     MP[ch] = 1;
     wait(0.05);
