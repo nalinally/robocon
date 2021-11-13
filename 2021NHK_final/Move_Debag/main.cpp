@@ -86,12 +86,12 @@ int main(void)
         
         //ロボットの移動量を決めるよ
         if(move[1] < (leftxleg + rightxleg) / 2){
-            x_move = move[1] - xcenter - leftx;
+            x_move = (move[1] - xcenter - leftx) * (50 / (float)ball[3]);
         }
         else{
-            x_move = move[1] - xcenter - rightx;
+            x_move = (move[1] - xcenter - rightx) * (50 / (float)ball[3]);
         }
-        y_move = -move[2] + ycenter + y;
+        y_move = (-move[2] + ycenter + y) * (50 / (float)ball[3]);
         
         //移動量(x_move, y_move)→(kakudo, kyori)に変換するよ
         if(x_move == 0){
