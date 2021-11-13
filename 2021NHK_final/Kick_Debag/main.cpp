@@ -13,7 +13,6 @@ PwmOut MP[2] = {
     PwmOut(PB_6)
 };
 
-Timer t;
 
 DigitalIn limit[2] = {
     DigitalIn(PA_6),
@@ -34,8 +33,8 @@ void PS3Data(void);
 
 //変数の宣言
 int ball[4];  //ball[0]:ヘッダ(128) ball[1]:横(0~63) ball[2]:縦(0~47) ball[3]:半径(0~39)
-int kickdis = 75;
-int radius[5], speed[2], alpha, i;
+int kickdis = 150;
+int radius[5], speed[2], alpha, i, n;
 
 
 //関数の中身
@@ -106,22 +105,12 @@ int main(void)
 void Kick(int ch)
 {
     PC.printf("Kick!\n\r");
-    wait(0.05);
-    kicking = 1;
+    wait(0.06);
     MD[ch] = 0;
-    MP[ch] = 0.8;
+    MP[ch] = 0.5;
+    wait(0.2);
+    kicking = 1;
     wait(0.4);
-    MD[ch] = 1;
-    MP[ch] = 1;
-    kicking = 0;
-    t.reset();
-    t.start();
-    while(1){
-        if(limit[ch] || t.read() > 0.2){
-            MP[ch] = 0;
-            break;
-        }
-    }
     MD[ch] = 1;
     MP[ch] = 0.5;
     while(1){
@@ -130,6 +119,7 @@ void Kick(int ch)
             break;
         }
     }
+    kicking = 0;
     MD[ch] = 0;
     MP[ch] = 1;
     wait(0.05);
