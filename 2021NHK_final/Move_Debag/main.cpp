@@ -26,18 +26,18 @@ void Move(float sheta, float r);  //足回り
 
 //変数の宣言
 int j = 0, m = 0, n = 1, c = 0;
-int ball[4];  //ball[0]:ヘッダ(128) ball[1]:横(0~638) ball[2]:縦(0~478) ball[3]:半径(0~400)
+int ball[4] = {128, 320, 240, 100};  //ball[0]:ヘッダ(128) ball[1]:横(0~638) ball[2]:縦(0~478) ball[3]:半径(0~400)
 float move[4] = {128, 0, 0, 0};  //本当の座標よ
 float differ[4] = {128, 0, 0, 0};  //微分制御に使う
 float integ_x[5] = {0, 0, 0, 0, 0}, integ_y[5] = {0, 0, 0, 0, 0};  //移動距離積分
 float kakudo, kyori;  //移動する角度と距離(速度?)
 float tanjent, squarekyori;  //途中計算で使うやつ
-float disgain = 0.020;  //足回りの速さ決める
+float disgain = 0.015;  //足回りの速さ決める
 float xrange = 638, yrange = 478, rrange = 400;
 float xcenter = xrange / 2;
 float ycenter = yrange / 2;
-float rightxleg = 445, leftxleg = 445, yleg = 335, rleg = 162;
-float xwind = 0, ywind = 0;  //会場の風～
+float rightxleg = 445, leftxleg = 445, yleg = 335, rleg = 175;
+float xwind = -20, ywind = -15;  //xwind:風船が内側に流れるときはプラス ywind:風船が先っちょに流れるときはプラス
 float rightx, leftx, y;  //足の座標
 float x_move, y_move;
 float speed = 0, theta = 0, accel, maxaccel = 0.075;
@@ -85,12 +85,16 @@ int main(void)
         */
         
         //ロボットの移動量を決めるよ
+        //ボールの高さに応じてゲインを決めるよ(決めないよ)
         if(move[1] < (leftxleg + rightxleg) / 2){
+            //x_move = (move[1] - xcenter - leftx) * 50 / (float)ball[3];
             x_move = move[1] - xcenter - leftx;
         }
         else{
+            //x_move = (move[1] - xcenter - rightx) * 50 / (float)ball[3];
             x_move = move[1] - xcenter - rightx;
         }
+        //y_move = (-move[2] + ycenter + y) * 50 / (float)ball[3];
         y_move = -move[2] + ycenter + y;
         
         //移動量(x_move, y_move)→(kakudo, kyori)に変換するよ
@@ -117,7 +121,7 @@ int main(void)
         
         //加速度制御するよ
         if(kicking){
-            maxaccel = 0.1;
+            maxaccel = 0.2;
         }
         else{
             maxaccel = 0.2;
@@ -143,6 +147,11 @@ int main(void)
         }
         speed = kyori;
         theta = kakudo;
+        
+        //キック中なら速度落とすよ（転倒防止＆キック中はボールが隠れて処理が乱れるから）
+        if(kicking){
+            kyori *= 0.6;
+        }
         
         //関数を経由して実際にロボットを動かすよ
         PC.printf("%d, %d, %d, %d, %.2f, %.2f\n\r", ball[0], ball[1], ball[2], ball[3], kakudo, kyori);
