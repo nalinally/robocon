@@ -1,0 +1,166 @@
+
+(rules PCB 2022NHK_XBee_ver2_v2
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (eu.mihosoft.freerouting.autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 6)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.4)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.7)
+    )
+  )
+  (rule
+    (width 250.0)
+    (clear 200.2)
+    (clear 125.0 (type smd_to_turn_gap))
+    (clear 500.2 (type default_Bigcurrent))
+    (clear 500.2 (type default_Signal))
+    (clear 50.0 (type smd_smd))
+    (clear 500.2 (type smd_Bigcurrent))
+    (clear 500.2 (type smd_Signal))
+    (clear 500.2 (type "kicad_default"_Bigcurrent))
+    (clear 500.2 (type "kicad_default"_Signal))
+    (clear 500.2 (type Bigcurrent_Bigcurrent))
+    (clear 500.2 (type Bigcurrent_Signal))
+    (clear 500.2 (type Signal_Signal))
+  )
+  (padstack "Via[0-1]_800:400_um"
+    (shape
+      (circle F.Cu 800.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 800.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (padstack "Via[0-1]_4000:2000_um"
+    (shape
+      (circle F.Cu 4000.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 4000.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (padstack "Via[0-1]_1500:750_um"
+    (shape
+      (circle F.Cu 1500.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 1500.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_800:400_um" "Via[0-1]_800:400_um" default
+  )
+  (via 
+    "Via[0-1]_4000:2000_um" "Via[0-1]_4000:2000_um" default
+  )
+  (via 
+    "Via[0-1]_1500:750_um" "Via[0-1]_1500:750_um" default
+  )
+  (via 
+    "Via[0-1]_800:400_um-kicad_default" "Via[0-1]_800:400_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_4000:2000_um-kicad_default" "Via[0-1]_4000:2000_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_1500:750_um-kicad_default" "Via[0-1]_1500:750_um" "kicad_default"
+  )
+  (via 
+    "Via[0-1]_800:400_um-Bigcurrent" "Via[0-1]_800:400_um" Bigcurrent
+  )
+  (via 
+    "Via[0-1]_4000:2000_um-Bigcurrent" "Via[0-1]_4000:2000_um" Bigcurrent
+  )
+  (via 
+    "Via[0-1]_1500:750_um-Bigcurrent" "Via[0-1]_1500:750_um" Bigcurrent
+  )
+  (via 
+    "Via[0-1]_800:400_um-Signal" "Via[0-1]_800:400_um" Signal
+  )
+  (via 
+    "Via[0-1]_4000:2000_um-Signal" "Via[0-1]_4000:2000_um" Signal
+  )
+  (via 
+    "Via[0-1]_1500:750_um-Signal" "Via[0-1]_1500:750_um" Signal
+  )
+  (via_rule
+    default "Via[0-1]_800:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_800:400_um-kicad_default"
+  )
+  (via_rule
+    Bigcurrent "Via[0-1]_4000:2000_um-Bigcurrent"
+  )
+  (via_rule
+    Signal "Via[0-1]_1500:750_um-Signal"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class Bigcurrent
+    2cell GND 3cell contact1b contact3b "2cell_out" "3cell_out" GNDPWR
+    (clearance_class Bigcurrent)
+    (via_rule Bigcurrent)
+    (rule
+      (width 2500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class Signal
+    +5V "Net-(IC1-Pad30)" "Net-(IC1-Pad29)" "Net-(IC1-Pad28)" signal4 signal3 signal2 signal1
+    "Net-(IC1-Pad23)" "Net-(IC1-Pad22)" "Net-(IC1-Pad21)" "Net-(IC1-Pad20)" "Net-(IC1-Pad18)" "serial_rx" "serial_tx" "Net-(IC1-Pad15)"
+    +3V3 "Net-(IC1-Pad13)" "Net-(IC1-Pad12)" "Net-(IC1-Pad11)" "Net-(IC1-Pad10)" "Net-(IC1-Pad9)" "Net-(IC1-Pad3)" "Net-(IC1-Pad8)"
+    "Net-(IC1-Pad7)" "Net-(IC1-Pad6)" "Net-(IC1-Pad5)" "Net-(IC1-Pad4)" coil1b coil3b coil2b coil4b
+    "Net-(R1-Pad1)" "Net-(R2-Pad1)" "Net-(R3-Pad1)" "Net-(R4-Pad1)" "Net-(U5-Pad5)" "Net-(U5-Pad6)" "Net-(U5-Pad7)" "Net-(U5-Pad8)"
+    "Net-(U5-Pad9)" "Net-(U5-Pad10)" "Net-(U5-Pad11)" "Net-(U5-Pad12)" "Net-(U5-Pad13)" "Net-(U5-Pad14)" "Net-(U5-Pad15)" "Net-(U5-Pad16)"
+    "Net-(U5-Pad17)" "Net-(U5-Pad18)" "Net-(U5-Pad19)" "Net-(U5-Pad20)" "Net-(U5-Pad21)" "Net-(U5-Pad22)"
+    (clearance_class Signal)
+    (via_rule Signal)
+    (rule
+      (width 750.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
