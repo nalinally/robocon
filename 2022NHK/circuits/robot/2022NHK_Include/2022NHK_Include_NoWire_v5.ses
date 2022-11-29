@@ -1,0 +1,118 @@
+
+(session 2022NHK_Include_NoWire_v5.ses
+  (base_design 2022NHK_Include_NoWire_v5.dsn)
+  (placement
+    (resolution um 10)
+    (component Capacitor_THT:CP_Radial_D7.5mm_P2.50mm
+      (place C1 273050 -294640 front 180)
+    )
+    (component Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P7.50mm_Horizontal
+      (place C2 350520 -233680 front 0)
+    )
+    (component LED_THT:LED_D3.0mm
+      (place D1 339090 -1256030 front 0)
+      (place D2 337820 -1358900 front 0)
+    )
+    (component Connector_T:Connector_T_Male
+      (place J4 767080 -247650 front 180)
+    )
+    (component "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal"
+      (place J5 2085880 -237490 front 90)
+      (place J6 2085880 -413849 front 90)
+      (place J7 2085880 -590207 front 90)
+      (place J8 2085880 -766566 front 90)
+      (place J9 2085880 -942924 front 90)
+      (place J10 2085880 -1119280 front 90)
+    )
+    (component "Connector_JST:JST_XH_S3B-XH-A_1x03_P2.50mm_Horizontal"
+      (place J11 905873 -1538890 front 0)
+      (place J12 1095280 -1538890 front 0)
+      (place J13 1284700 -1538890 front 0)
+      (place J14 2085880 -1320640 front 90)
+      (place J15 1852930 -1538890 front 0)
+      (place J16 1663520 -1538890 front 0)
+      (place J17 1474110 -1538890 front 0)
+    )
+    (component Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical
+      (place J20 2071370 -1460500 front 0)
+    )
+    (component Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+      (place R1 285750 -1256030 front 180)
+      (place R2 285750 -1358900 front 180)
+      (place R3 349250 -313690 front 0)
+    )
+    (component Regulator:NJM7805FA
+      (place U2 440690 -471170 front 270)
+      (place U3 736600 -471170 front 270)
+    )
+    (component xbee:xbee_pro_s1
+      (place U4 388620 -867410 front 180)
+    )
+    (component MPU6050:GY=521
+      (place U5 852170 -1233170 front 90)
+    )
+    (component SW_Toggle:SW_Toggle_2.54mm
+      (place SW1 278130 -1522510 front 0)
+      (place SW2 375920 -1522510 front 0)
+    )
+    (component "NUCLEO-F446RE:MODULE_NUCLEO_F446RE"
+      (place U1 1191260 -566420 front 0)
+    )
+    (component "Potentiometer_THT:Potentiometer_Bourns_PTV09A-1_Single_Vertical"
+      (place RV1 342900 -1052830 front 180)
+    )
+    (component "Connector_JST:JST_XH_S3B-XH-A_1x03_P2.50mm_Horizontal::1"
+      (place J21 716461 -1538890 front 0)
+      (place J23 527050 -1538890 front 0)
+    )
+    (component "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
+      (place J1 1893570 -273850 front 270)
+      (place J2 1897380 -560070 front 270)
+    )
+    (component "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical::1"
+      (place J3 1906270 -812800 front 270)
+    )
+    (component Connector_T:Connector_T_Female
+      (place J22 593090 -247650 front 180)
+    )
+    (component "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical"
+      (place J18 656590 -648100 front 270)
+      (place J25 1164590 -1278890 front 0)
+    )
+    (component "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical::1"
+      (place J19 656590 -921550 front 270)
+      (place J24 1418590 -1278890 front 0)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "(5.1.0)-1")
+    )
+    (library_out 
+      (padstack "Via[0-1]_1500:400_um"
+        (shape
+          (circle F.Cu 15000 0 0)
+        )
+        (shape
+          (circle B.Cu 15000 0 0)
+        )
+        (attach off)
+      )
+      (padstack "Via[0-1]_4000:400_um"
+        (shape
+          (circle F.Cu 40000 0 0)
+        )
+        (shape
+          (circle B.Cu 40000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+    )
+  )
+)

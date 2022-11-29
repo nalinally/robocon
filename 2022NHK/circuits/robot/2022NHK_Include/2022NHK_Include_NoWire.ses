@@ -1,0 +1,96 @@
+
+(session 2022NHK_Include_NoWire.ses
+  (base_design 2022NHK_Include_NoWire.dsn)
+  (placement
+    (resolution um 10)
+    (component Capacitor_THT:CP_Radial_D7.5mm_P2.50mm
+      (place C1 800100 -486410 front 90)
+    )
+    (component Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P7.50mm_Horizontal
+      (place C2 876300 -450850 front 0)
+    )
+    (component LED_THT:LED_D3.0mm
+      (place D1 1057910 -1097280 front 0)
+      (place D2 1056640 -1163320 front 0)
+    )
+    (component Connector_T:Connector_T_Male
+      (place J4 1101090 -474980 front 180)
+    )
+    (component "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal"
+      (place J5 2142490 -474980 front 90)
+      (place J6 2142490 -588500 front 90)
+      (place J7 2142490 -702020 front 90)
+      (place J8 2142490 -815540 front 90)
+      (place J9 2142490 -929060 front 90)
+      (place J10 2142490 -1042580 front 90)
+    )
+    (component "Connector_JST:JST_XH_S3B-XH-A_1x03_P2.50mm_Horizontal"
+      (place J11 1261190 -1311910 front 0)
+      (place J12 1414080 -1311910 front 0)
+      (place J13 1566970 -1311910 front 0)
+      (place J14 2142490 -1181100 front 90)
+      (place J15 2025650 -1311910 front 0)
+      (place J16 1872760 -1311910 front 0)
+      (place J17 1719870 -1311910 front 0)
+    )
+    (component Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical
+      (place J20 2180590 -1272540 front 0)
+    )
+    (component Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+      (place R1 1004570 -1097280 front 180)
+      (place R2 1004570 -1163320 front 180)
+      (place R3 877570 -501650 front 0)
+    )
+    (component "3362P-1-103:TRIM_3362P-1-103"
+      (place RV1 808990 -1121410 front 0)
+    )
+    (component Regulator:NJM7805FA
+      (place U2 993140 -635000 front 270)
+      (place U3 1069340 -635000 front 270)
+    )
+    (component xbee:xbee_pro_s1
+      (place U4 960120 -745490 front 0)
+    )
+    (component MPU6050:GY=521
+      (place U5 1073150 -1291590 front 90)
+    )
+    (component "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical"
+      (place J1 2035810 -449580 front 270)
+      (place J2 2035810 -676910 front 270)
+      (place J3 2035810 -904240 front 270)
+    )
+    (component SW_Toggle:SW_Toggle_2.54mm
+      (place SW1 845820 -1258570 front 270)
+      (place SW2 845820 -1356360 front 270)
+    )
+    (component "NUCLEO-F446RE:MODULE_NUCLEO_F446RE"
+      (place U1 1531620 -605790 front 0)
+    )
+    (component "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical"
+      (place J18 783590 -806450 front 90)
+      (place J19 783590 -958850 front 90)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "(5.1.0)-1")
+    )
+    (library_out 
+      (padstack "Via[0-1]_800:400_um"
+        (shape
+          (circle F.Cu 8000 0 0)
+        )
+        (shape
+          (circle B.Cu 8000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+    )
+  )
+)
