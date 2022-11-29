@@ -1,0 +1,90 @@
+
+(session 2022NHK_Con_lead_v2_nowire.ses
+  (base_design 2022NHK_Con_lead_v2_nowire.dsn)
+  (placement
+    (resolution um 10)
+    (component Regulator:NJM7805FA
+      (place U1 505460 -287020 front 270)
+    )
+    (component Capacitor_THT:CP_Radial_D6.3mm_P2.50mm
+      (place C1 189230 -240030 front 90)
+    )
+    (component Capacitor_THT:C_Axial_L3.8mm_D2.6mm_P7.50mm_Horizontal
+      (place C2 129470 -322580 front 0)
+    )
+    (component LED_THT:LED_D3.0mm
+      (place D1 384810 -974090 front 270)
+      (place D2 384810 -1051560 front 270)
+    )
+    (component Connector_T:Connector_T_Male
+      (place J1 105070 -86360 front 0)
+    )
+    (component "Connector_JST:JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal"
+      (place J2 1902460 -410845 front 90)
+      (place J3 1656080 -1402080 front 0)
+      (place J9 1902460 -973455 front 90)
+      (place J10 1076110 -1402080 front 0)
+    )
+    (component Connector_T:Connector_T_Female
+      (place J4 372110 -86360 front 0)
+    )
+    (component "Connector_JST:JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal::1"
+      (place J6 1902460 -692150 front 90)
+      (place J7 1366100 -1402080 front 0)
+      (place J11 1902460 -1254760 front 90)
+      (place J12 786130 -1402080 front 0)
+    )
+    (component "Connector_JST:JST_XH_S3B-XH-A_1x03_P2.50mm_Horizontal"
+      (place J8 97790 -622277 front 270)
+      (place J13 97790 -441960 front 270)
+    )
+    (component Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+      (place R1 246380 -986840 front 0)
+      (place R2 246380 -1064310 front 0)
+    )
+    (component "NUCLEO-F446RE:MODULE_NUCLEO_F446RE"
+      (place U2 981710 -492760 front 0)
+    )
+    (component "Connector_JST:JST_XH_S4B-XH-A_1x04_P2.50mm_Horizontal"
+      (place J5 1902460 -129540 front 90)
+      (place J15 97790 -1057910 front 270)
+    )
+    (component "Connector_JST:JST_XH_S6B-XH-A_1x06_P2.50mm_Horizontal"
+      (place J14 97790 -802593 front 270)
+    )
+    (component xbee:xbee_pro_s1
+      (place U3 436880 -1195070 front 0)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "(5.1.0)-1")
+    )
+    (library_out 
+      (padstack "Via[0-1]_1500:400_um"
+        (shape
+          (circle F.Cu 15000 0 0)
+        )
+        (shape
+          (circle B.Cu 15000 0 0)
+        )
+        (attach off)
+      )
+      (padstack "Via[0-1]_3500:400_um"
+        (shape
+          (circle F.Cu 35000 0 0)
+        )
+        (shape
+          (circle B.Cu 35000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+    )
+  )
+)
